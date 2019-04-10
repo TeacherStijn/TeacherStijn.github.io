@@ -12,12 +12,8 @@ self.addEventListener('fetch', (ev) => {
 		console.log(`Onderschept! Data = ${ev.request.method}`);
 		
 		ev.respondWith(
-		
-			async function(){
-		
 				/* Mooier is al dan niet met cache te werken, maar gaat nu over
 				het concept van onderscheppen */
 				return fetch(ev.request);		
-			}
 		);
 });
