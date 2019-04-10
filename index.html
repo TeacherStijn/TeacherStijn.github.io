@@ -14,7 +14,7 @@
 		<script>
 			window.onload = function(){
 				if ('serviceWorker' in navigator) {
-					navigator.serviceWorker.register('scripts/sw.js').then(
+					navigator.serviceWorker.register('sw.js').then(
 						registratie=> {
 							console.log(`Registratie gelukt: ${registratie.scope}`);
 							
