@@ -55,6 +55,7 @@
 					);
 					
 					function maakPushUser(registratie){
+						console.log(`Public key: ${applicationServerPublicKey}`);
 						const applicationServerKey = base64naarUnit8Array(applicationServerPublicKey);
 						
 						registratie.pushManager.subscribe(
