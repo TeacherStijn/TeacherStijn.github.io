@@ -26,7 +26,7 @@ self.addEventListener('fetch', (ev) => {
 		);
 	
 		ev.respondWith(
-			fetch(nieuwRequest); //Hier wordt een Promise verwacht
+			fetch(nieuwRequest) //Hier wordt een Promise verwacht
 		);
 	}
 });
