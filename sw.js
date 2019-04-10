@@ -12,7 +12,12 @@ self.addEventListener('fetch', (ev) => {
 	console.log(`Onderschept! Data = ${ev.request.url}`);
 	
 	ev.respondWith(
-		return fetch(ev.request);	
+	
+		/* Mooier is al dan niet met cache te werken, maar gaat nu over
+		   het concept van onderscheppen */
+		return fetch(ev.request).then(
+			res=>{ console.log(`Goed gegaan? ${res}`); }
+		);		
 	);
 	
 });
