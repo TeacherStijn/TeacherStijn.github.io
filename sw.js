@@ -14,15 +14,20 @@ self.addEventListener('fetch', (ev) => {
 	let nieuweURL = oudRequest.url.replace('edwalter','stinow');
 	
 	ev.respondWith(
-		let nieuwRequest = new Request(
-			nieuweURL,
-			{
-				method: oudRequest.method,
-				headers: oudRequest.headers,
-				mode: oudRequest.mode
-			}
-		);
+	
+		//Hier wordt een Promise verwacht:
 		
-		return fetch(nieuwRequest);
+		async function(){
+			let nieuwRequest = new Request(
+				nieuweURL,
+				{
+					method: oudRequest.method,
+					headers: oudRequest.headers,
+					mode: oudRequest.mode
+				}
+			);
+			
+			return fetch(nieuwRequest);
+		}
 	);
 });
