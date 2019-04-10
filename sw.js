@@ -8,4 +8,13 @@ self.addEventListener('activate', (ev) => {
 
 self.addEventListener('fetch', (ev) => {
 	
+	// Aanpassen request en doorsturen + op abboneren:
+	ev.respondWith(
+		function() {
+			console.log(`Onderschept! Data = ${ev.request.url}`);
+			return fetch(ev.request);
+		}
+		
+	);
+	
 });

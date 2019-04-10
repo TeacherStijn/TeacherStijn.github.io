@@ -13,6 +13,27 @@
 		<!-- Service Worker registreren -->
 		<script>
 			window.onload = function(){
+				document.getElementById("btnGetGames").addEventListener(
+					"click",
+					function(ev){
+						let url = 'https://bgg-json.azurewebsites.net/collection/stinow';
+						fetch(url).then(
+							response => {
+								return response.json();
+							}
+						).then(
+							result => {
+								console.dir(result);
+							}
+						).catch(
+							fout => {
+								console.log(`Ging iets fout: ${fout}`);
+							}
+						);
+					}
+				);
+			
+			
 				if ('serviceWorker' in navigator) {
 					navigator.serviceWorker.register('sw.js').then(
 						registratie=> {
@@ -56,16 +77,16 @@
 					);
 					
 					function maakPushUser(registratie){
-						//console.log(`Public key: ${applicationServerPublicKey}`);
-						//const applicationServerKey = 'BGIogW4A7dzepYWHX4q9TU2j1j_KsNJRZJIx200TfvCF_6IYu6mZwJV73GazlsYoIcaxGv1lwsxc0e7p6toSq5s';
+						/* Hier krijgen we nu nog een fout, i.v.m. we dienen een key van de server te krijgen
+						   omdat we nu geen server hebben draaien, kun je geen key verkrijgen en dus niet
+						   valideren met de backend wie wij zijn om notificaties aan te zetten */
+						   
 						//const applicationServerKey = base64naarUnit8Array(applicationServerPublicKey);
-						
-						const applicationServerKey = new ArrayBuffer(10);
 						
 						registratie.pushManager.subscribe(
 							{
 								userVisibleOnly: true,
-								applicationServerKey: applicationServerKey
+								applicationServerKey: 12345 //applicationServerKey
 							}
 						).then(
 							sub => {
@@ -110,7 +131,12 @@
 			</header>
 			<main>
 				<article>
-					<section></section>
+					<section>
+						<h2>Boardgames</h2>
+						<div>
+							<button id="btnGetGames">Haal games op</button>
+						</div>
+					</section>
 					<section></section>
 				</article>
 			</main>
