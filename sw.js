@@ -19,7 +19,7 @@ self.addEventListener('fetch', (ev) => {
 		
 			//Hier wordt een Promise verwacht:
 			
-			async function(){
+			//async function(){
 				let nieuwRequest = new Request(
 					nieuweURL,
 					{
@@ -30,7 +30,7 @@ self.addEventListener('fetch', (ev) => {
 				);
 				
 				return fetch(nieuwRequest);
-			}
+			//}
 		);
 	}
 });
