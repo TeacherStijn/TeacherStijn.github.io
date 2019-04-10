@@ -43,47 +43,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-let url = 'https://bgg-json.azurewebsites.net/collection/stinow';
-						fetch(url).then(
-							response => {
-								return response.json();
-							}
-						).then(
-							result => {
-								console.dir(result);
-							}
-						).catch(
-							fout => {
-								console.log(`Ging iets fout: ${fout}`);
-							}
-						);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	
 							if ('PushManager' in window){
 								console.log("Push berichten worden ondersteund!");						
