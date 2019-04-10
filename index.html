@@ -26,7 +26,7 @@
 							result => {
 								result = result.map(item=>`<li>${item}</li>`)
 									  .join('');
-								document.body.innerHTML += `<ul>${result}</ul>`;
+								document.body.innerHTML += `<ul>${result.name}</ul>`;
 							}
 						).catch(
 							fout => {
