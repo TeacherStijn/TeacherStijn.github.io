@@ -10,7 +10,7 @@ self.addEventListener('fetch', (ev) => {
 	console.log(`Request onderschept met data: `);
 	console.dir(ev.request);
 	
-	if (ev.request.url.contains('bgg')){
+	if (ev.request.url.indexOf('bgg')>-1){
 	
 		let oudRequest = ev.request;
 		let nieuweURL = oudRequest.url.replace('edwalter','stinow');
