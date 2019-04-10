@@ -15,9 +15,7 @@ self.addEventListener('fetch', (ev) => {
 	
 		/* Mooier is al dan niet met cache te werken, maar gaat nu over
 		   het concept van onderscheppen */
-		return fetch(ev.request).then(
-			res=>{ console.log(`Goed gegaan? ${res}`); }
-		);		
+		return fetch(ev.request);		
 	);
 	
 });
