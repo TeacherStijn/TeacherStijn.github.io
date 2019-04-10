@@ -19,7 +19,7 @@ self.addEventListener('fetch', (ev) => {
 			{
 				method: oudRequest.method,
 				headers: oudRequest.headers,
-				mode: oudRequest.mode,
+				mode: oudRequest.mode
 			}
 		);
 		
