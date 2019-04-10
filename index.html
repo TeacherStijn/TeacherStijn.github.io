@@ -24,7 +24,9 @@
 							}
 						).then(
 							result => {
-								console.dir(result);
+								result = result.map(item=>`<li>${item}</li>`)
+									  .join('');
+								document.body.innerHTML += `<ul>${result}</ul>`;
 							}
 						).catch(
 							fout => {
