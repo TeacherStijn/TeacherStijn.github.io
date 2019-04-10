@@ -41,6 +41,7 @@
 								registratie.pushManager.getSubscription().then(
 									sub =>{
 										if (sub === null) {
+											console.log("Er is nog geen geregistreerde Push-gebruiker");
 											maakPushUser(registratie);
 										}
 									}
