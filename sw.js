@@ -7,5 +7,5 @@ self.addEventListener('activate', (ev) => {
 });
 
 self.addEventListener('fetch', (ev) => { 
-	
+	console.log("Hallo daar?");
 });
