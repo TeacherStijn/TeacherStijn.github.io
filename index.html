@@ -2,8 +2,44 @@
 
 <html>
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Voorbeeld PWA webpagina</title>
+		
+		<!-- Zorgen voor weergeven juiste zoom-level v/d webpagina -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- Inladen van het manifest bestand -->
+		<link rel="manifest" href="manifest.json" />
+		
+		<!-- Service Worker registreren -->
+		<script>
+			window.onload = function(){
+				if ('serviceWorker' in navigator) {
+					navigator.serviceWorker.register('scripts/sw.js').then(
+						registratie=> {
+							console.log(`Registratie gelukt: ${registratie.scope}`);
+							
+							if ('PushManager' in window){
+								console.log("Push berichten worden ondersteund!");
+								
+								let jaNeePush = document.createElement("input");
+								jaNeePush.setAttribute("type","checkbox");
+								jaNeePush.setAttribute("id","jaNeePush");
+								
+								let jaNeeDiv = document.createElement("div");
+								let jaNeeVraag = document.createTextNode("Push notificaties?");
+								jaNeeDiv.appendChild(jaNeeVraag);
+								jaNeeDiv.appendChild(jaNeePush);
+								document.body.appendChild(jaNeeDiv);
+							}
+						}
+					).catch(
+						fout=> {
+							console.log(`Er is iets foutgegaan: ${fout}`);
+						}
+					);
+				}
+			}
+		</script>
 	</head>
 	<body>
 			<header>
