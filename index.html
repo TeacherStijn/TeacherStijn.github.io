@@ -17,7 +17,7 @@
 				document.getElementById("btnGetGames").addEventListener(
 					"click",
 					function(ev){
-						let url = 'https://bgg-json.azurewebsites.net/collection/stinow';
+						let url = 'https://bgg-json.azurewebsites.net/collection/edwalter';
 						fetch(url).then(
 							response => {
 								return response.json();
@@ -39,10 +39,6 @@
 					navigator.serviceWorker.register('sw.js').then(
 						registratie=> {
 							console.log(`Registratie gelukt: ${registratie.scope}`);
-	
-
-
-
 	
 							if ('PushManager' in window){
 								console.log("Push berichten worden ondersteund!");						

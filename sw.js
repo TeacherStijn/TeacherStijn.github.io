@@ -7,5 +7,22 @@ self.addEventListener('activate', (ev) => {
 });
 
 self.addEventListener('fetch', (ev) => { 
-	console.log("Hallo daar?");
+	console.log(`Request onderschept met data: `);
+	console.dir(ev.request);
+	
+	let oudRequest = ev.request;
+	let nieuweURL = oudRequest.url.replace('edwalter','stinow');
+	
+	ev.respondWith(
+		let nieuwRequest = new Request(
+			nieuweURL,
+			{
+				method: oudRequest.method,
+				headers: oudRequest.headers,
+				mode: oudRequest.mode,
+			}
+		);
+		
+		return fetch(nieuwRequest);
+	);
 });
