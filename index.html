@@ -39,32 +39,65 @@
 					navigator.serviceWorker.register('sw.js').then(
 						registratie=> {
 							console.log(`Registratie gelukt: ${registratie.scope}`);
-							
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let url = 'https://bgg-json.azurewebsites.net/collection/stinow';
+						fetch(url).then(
+							response => {
+								return response.json();
+							}
+						).then(
+							result => {
+								console.dir(result);
+							}
+						).catch(
+							fout => {
+								console.log(`Ging iets fout: ${fout}`);
+							}
+						);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 							if ('PushManager' in window){
-								console.log("Push berichten worden ondersteund!");
-								
-								/* Maken checkBox voor uberhaupt wel of geen melding
-								   willen krijgen óf ze berichten willen ontvangen
-								   
-								let jaNeePush = document.createElement("input");
-								jaNeePush.setAttribute("type","checkbox");
-								jaNeePush.setAttribute("id","jaNeePush");
-								
-								let jaNeeDiv = document.createElement("div");
-								let jaNeeVraag = document.createTextNode("Push notificaties?");
-								jaNeeDiv.appendChild(jaNeeVraag);
-								jaNeeDiv.appendChild(jaNeePush);
-								document.body.appendChild(jaNeeDiv);
-								
-								*/
-								
+								console.log("Push berichten worden ondersteund!");						
 								
 								/* Push subscriptie checken */
 								registratie.pushManager.getSubscription().then(
 									sub =>{
 										if (sub === null) {
 											console.log("Er is nog geen geregistreerde Push-gebruiker");
-											maakPushUser(registratie);
+											
+											/* Dit gaan we pas doen zodra er een back-end server is om validatie
+											   keys van te krijgen */
+											   
+											//maakPushUser(registratie);
 										}
 									}
 								)
