@@ -57,8 +57,10 @@
 					
 					function maakPushUser(registratie){
 						//console.log(`Public key: ${applicationServerPublicKey}`);
+						//const applicationServerKey = 'BGIogW4A7dzepYWHX4q9TU2j1j_KsNJRZJIx200TfvCF_6IYu6mZwJV73GazlsYoIcaxGv1lwsxc0e7p6toSq5s';
 						//const applicationServerKey = base64naarUnit8Array(applicationServerPublicKey);
-						const applicationServerKey = 'BGIogW4A7dzepYWHX4q9TU2j1j_KsNJRZJIx200TfvCF_6IYu6mZwJV73GazlsYoIcaxGv1lwsxc0e7p6toSq5s';
+						
+						const applicationServerKey = new Uint8Array(10);
 						
 						registratie.pushManager.subscribe(
 							{
