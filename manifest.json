@@ -3,8 +3,8 @@
   "short_name": "VB PWA",
   "theme_color": "#f3a521",
   "background_color": "#a5a9ac",
-  "display": "fullscreen",
-  "Scope": "/",
+  "display": "standalone",
+  "scope": "/",
   "start_url": "/",
   "icons": [
     {
@@ -47,6 +47,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "splash_pages": null
+  ]
 }
