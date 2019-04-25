@@ -41,3 +41,9 @@ self.addEventListener('fetch', (ev) => {
 		}()
 	);
 });
+
+self.addEventListener('push', ev = > {
+	let toonBerichtPromise$ = self.registration.showNotification('Speciaal bericht voor u!');
+
+	ev.waitUntil(toonBerichtPromise$);
+})
