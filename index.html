@@ -53,33 +53,24 @@
 								
 								Notification.requestPermission().then(
 									antwoord => {
-										if (antwoord === 'default' || antwoord === 'denied'){
-											console.log('helaas; geen toestemming');
+										if (antwoord === 'default'){
+											console.log('helaas; weggeklikt');
+											return;
+										}
+										
+										if (antwoord === 'denied'){
+											console.log('helaas; geweigerd');
 											return;
 										}
 									
 										if (antwoord==='granted'){
 											console.log('hoera!');
-											// hier iets doen.
+											
+											// Check bestaande registratie en maak gebruiker:
+											checkRegistratie();
 										}
 									}
 								);
-								
-								
-								/* Push subscriptie checken */
-								registratie.pushManager.getSubscription().then(
-									sub =>{
-										if (sub === null) {
-											console.log("Er is nog geen geregistreerde Push-gebruiker");
-											
-											/* Dit gaan we pas doen zodra er een back-end server is om validatie
-											   keys van te krijgen */
-											   
-											//maakPushUser(registratie);
-										}
-									}
-								)
-								
 							}
 						}
 					).catch(
@@ -87,6 +78,21 @@
 							console.log(`Er is iets foutgegaan: ${fout}`);
 						}
 					);
+
+					function checkRegistratie(){
+						registratie.pushManager.getSubscription().then(
+							sub =>{
+								if (sub === null) {
+									console.log("Er is nog geen geregistreerde Push-gebruiker");
+									
+									/* Dit gaan we pas doen zodra er een back-end server is om validatie
+									   keys van te krijgen */
+									   
+									//maakPushUser(registratie);
+								}
+							}
+						);
+					}
 					
 					function maakPushUser(registratie){
 						/* Hier krijgen we nu nog een fout, i.v.m. we dienen een key van de server te krijgen
