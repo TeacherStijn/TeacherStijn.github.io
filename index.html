@@ -67,7 +67,14 @@
 											console.log('hoera!');
 											
 											// Check bestaande registratie en maak gebruiker:
-											checkRegistratie();
+											registratie.pushManager.getSubscription().then(
+													sub =>{
+														if (sub === null) {
+															console.log("Er is nog geen geregistreerde Push-gebruiker");
+															maakPushUser(registratie);
+														}
+													}
+											);
 										}
 									}
 								);
@@ -79,17 +86,6 @@
 						}
 					);
 
-					function checkRegistratie(){
-						registratie.pushManager.getSubscription().then(
-							sub =>{
-								if (sub === null) {
-									console.log("Er is nog geen geregistreerde Push-gebruiker");
-									maakPushUser(registratie);
-								}
-							}
-						);
-					}
-					
 					function maakPushUser(registratie){				   
 						const publicKey = urlBase64ToUint8Array('BO_jVugPTE8AMOQqIGWEPcbJWRKI6nI6IdnH7vLN4_KoPMn9hySs9-w-b4cMytP3Z_YnZeFh2lWqJD2xepMitTY');
 						
