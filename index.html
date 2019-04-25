@@ -94,17 +94,13 @@
 						);
 					}
 					
-					function maakPushUser(registratie){
-						/* Hier krijgen we nu nog een fout, i.v.m. we dienen een key van de server te krijgen
-						   omdat we nu geen server hebben draaien, kun je geen key verkrijgen en dus niet
-						   valideren met de backend wie wij zijn om notificaties aan te zetten */
-						   
-						//const applicationServerKey = base64naarUint8Array(applicationServerPublicKey);
+					function maakPushUser(registratie){				   
+						const publicKey = urlBase64ToUint8Array('BO_jVugPTE8AMOQqIGWEPcbJWRKI6nI6IdnH7vLN4_KoPMn9hySs9-w-b4cMytP3Z_YnZeFh2lWqJD2xepMitTY');
 						
 						registratie.pushManager.subscribe(
 							{
 								userVisibleOnly: true,
-								applicationServerKey: 12345 //Uint8Array applicationServerKey
+								applicationServerKey: publicKey
 							}
 						).then(
 							sub => {
@@ -123,20 +119,25 @@
 						console.dir(subscriptie);
 					}
 					
-					let BASE64_MARKER = ';base64,';
+					
+					/**
+					 * urlBase64ToUint8Array -- GOOGLE Functie
+					 * 
+					 * @param {string} base64String a public vavid key
+					 */
+					function urlBase64ToUint8Array(base64String) {
+						var padding = '='.repeat((4 - base64String.length % 4) % 4);
+						var base64 = (base64String + padding)
+							.replace(/\-/g, '+')
+							.replace(/_/g, '/');
 
-					function base64naarUint8Array(dataURI) {
-						// Gemaakt door: https://gist.github.com/borismus/1032746
-						var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-						var base64 = dataURI.substring(base64Index);
-						var raw = window.atob(base64);
-						var rawLength = raw.length;
-						var array = new Uint8Array(new ArrayBuffer(rawLength));
+						var rawData = window.atob(base64);
+						var outputArray = new Uint8Array(rawData.length);
 
-						for(i = 0; i < rawLength; i++) {
-						array[i] = raw.charCodeAt(i);
+						for (var i = 0; i < rawData.length; ++i) {
+							outputArray[i] = rawData.charCodeAt(i);
 						}
-						return array;
+						return outputArray;
 					}
 				}
 			}
