@@ -7,26 +7,33 @@ self.addEventListener('activate', (ev) => {
 });
 
 self.addEventListener('fetch', (ev) => { 
-	console.log(`Request onderschept met data: `);
-	console.dir(ev.request);
+
+	ev.respondWith(
+		// Deze functie wilt een Promise; dus een async function die promise opleverd is goed
+		async function() {
 	
-	if (ev.request.url.indexOf('bgg')>-1){
-	
-		let oudRequest = ev.request;
-		let nieuweURL = oudRequest.url.replace('edwalter','stinow');
-	
-		let nieuwRequest = new Request(
-			nieuweURL,
-			{
-				method: oudRequest.method,
-				headers: oudRequest.headers,
-				mode: oudRequest.mode,
-				credentials: oudRequest.credentials
+			console.log(`Request onderschept met data: `);
+			console.dir(ev.request);
+			
+			if (ev.request.url.indexOf('bgg')>-1){
+			
+				let oudRequest = ev.request;
+				let nieuweURL = oudRequest.url.replace('edwalter','stinow');
+			
+				let nieuwRequest = new Request(
+					nieuweURL,
+					{
+						method: oudRequest.method,
+						headers: oudRequest.headers,
+						mode: oudRequest.mode,
+						credentials: oudRequest.credentials
+					}
+				);
+			
+				return fetch(nieuwRequest); //Hier wordt een Promise verwacht
+			} else {
+				return fetch(ev.request);
 			}
-		);
-	
-		ev.respondWith(
-			fetch(nieuwRequest) //Hier wordt een Promise verwacht
-		);
-	}
+		}()
+	);
 });
