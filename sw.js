@@ -9,7 +9,11 @@ self.addEventListener('activate', (ev) => {
 self.addEventListener('fetch', (ev) => { 
 
 	ev.respondWith(
-		// Deze functie wilt een Promise; dus een async function die promise opleverd is goed
+	
+		// Deze functie wilt een Promise; 
+		// 'async function(){..}() wordt door JavaScript 
+		// AUTOMATISCH in een Promise verpakt! :-)
+		
 		async function() {
 	
 			console.log(`Request onderschept met data: `);

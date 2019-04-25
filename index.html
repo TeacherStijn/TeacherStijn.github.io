@@ -51,6 +51,21 @@
 							if ('PushManager' in window){
 								console.log("Push berichten worden ondersteund!");						
 								
+								Notification.requestPermission().then(
+									antwoord => {
+										if (antwoord === 'default' || antwoord === 'denied'){
+											console.log('helaas; geen toestemming');
+											return;
+										}
+									
+										if (antwoord==='granted'){
+											console.log('hoera!');
+											// hier iets doen.
+										}
+									}
+								);
+								
+								
 								/* Push subscriptie checken */
 								registratie.pushManager.getSubscription().then(
 									sub =>{
@@ -78,12 +93,12 @@
 						   omdat we nu geen server hebben draaien, kun je geen key verkrijgen en dus niet
 						   valideren met de backend wie wij zijn om notificaties aan te zetten */
 						   
-						//const applicationServerKey = base64naarUnit8Array(applicationServerPublicKey);
+						//const applicationServerKey = base64naarUint8Array(applicationServerPublicKey);
 						
 						registratie.pushManager.subscribe(
 							{
 								userVisibleOnly: true,
-								applicationServerKey: 12345 //applicationServerKey
+								applicationServerKey: 12345 //Uint8Array applicationServerKey
 							}
 						).then(
 							sub => {
@@ -104,7 +119,7 @@
 					
 					let BASE64_MARKER = ';base64,';
 
-					function base64naarUnit8Array(dataURI) {
+					function base64naarUint8Array(dataURI) {
 						// Gemaakt door: https://gist.github.com/borismus/1032746
 						var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
 						var base64 = dataURI.substring(base64Index);
