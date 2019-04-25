@@ -54,17 +54,17 @@
 								Notification.requestPermission().then(
 									antwoord => {
 										if (antwoord === 'default'){
-											console.log('helaas; weggeklikt');
+											console.log('Helaas; notificatie verzoek weggeklikt');
 											return;
 										}
 										
 										if (antwoord === 'denied'){
-											console.log('helaas; geweigerd');
+											console.log('Helaas; notificaties geweigerd');
 											return;
 										}
 									
 										if (antwoord==='granted'){
-											console.log('hoera!');
+											console.log('Hoera! We hebben toestemming voor notificaties');
 											
 											// Check bestaande registratie en maak gebruiker:
 											registratie.pushManager.getSubscription().then(
