@@ -64,4 +64,5 @@ self.addEventListener('notificationclick', ev => {
         return client.navigate('https://www.vijfhart.nl');
       }
     });
+  }));
 });
