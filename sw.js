@@ -55,5 +55,13 @@ self.addEventListener('push', ev => {
 });
 
 self.addEventListener('notificationclick', ev => { 
-	client.navigate('https://www.vijfhart.nl');
+  ev.waitUntil(self.clients.claim().then(() => {
+	  return self.clients.matchAll({type: 'window'});
+  }).then(clients => {
+    return clients.map(client => {
+      // Check to make sure WindowClient.navigate() is supported.
+      if ('navigate' in client) {
+        return client.navigate('https://www.vijfhart.nl');
+      }
+    });
 });
