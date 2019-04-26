@@ -55,11 +55,14 @@ self.addEventListener('push', ev => {
 });
 
 self.addEventListener('notificationclick', ev => { 
+
+  // ophalen lijst met clients van de Service Worker:
   ev.waitUntil(self.clients.claim().then(() => {
 	  return self.clients.matchAll({type: 'window'});
   }).then(clients => {
+	// pér client nu navigeren naar een andere URL
     return clients.map(client => {
-      // Check to make sure WindowClient.navigate() is supported.
+      // Ondersteuning checken
       if ('navigate' in client) {
         return client.navigate('https://www.vijfhart.nl');
       }
