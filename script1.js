@@ -1,8 +1,10 @@
 self.addEventListener('message', function(msg){
-	setTimeout(
-		function(){
-			Atomics.add(msg.data,0,10);
-			self.postMessage('Bijgewerkt naar 10?');
-		}, 10000
-	);
+	//setTimeout(
+	//	function(){
+			for (let i=0; i<msg.data.length; i++){
+				Atomics.add(msg.data,i,10);
+				self.postMessage('Bijgewerkt naar 10?');
+			}
+	//	}, 10000
+	//);
 });
