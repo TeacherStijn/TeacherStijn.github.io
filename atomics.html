@@ -3,7 +3,7 @@
 <hmtl>
 	<head>
 		<script>
-			let buffer = new SharedArrayBuffer(5);
+			let buffer = new SharedArrayBuffer(10);
 			
 			// probeer dit eens zonder deze thread-safe buffer
 			let reeks = new Uint8Array(buffer);
@@ -13,12 +13,14 @@
 
 			werker1.addEventListener('message', function(msg){
 				console.log('Antwoord van 1: ' + msg.data);
-				console.log(Atomics.load(reeks, 0));
+				console.log(Atomics.load(reeks, 5));
+				console.log(Atomics.load(reeks, 10));
 			});
 
 			werker2.addEventListener('message', function(msg){
 				console.log('Antwoord van 2: ' + msg.data);			
-				console.log(Atomics.load(reeks, 0));				
+				console.log(Atomics.load(reeks, 5));
+				console.log(Atomics.load(reeks, 10));				
 			});
 
 			async function start1() {
