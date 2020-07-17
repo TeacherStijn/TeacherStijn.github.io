@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<hmtl>
+	<head>
+		<script>
+			let buffer = new SharedArrayBuffer(5);
+			
+			// probeer dit eens zonder deze thread-safe buffer
+			let reeks = new Uint8Array(buffer);
+			
+			let werker1 = new Worker('script1.js');
+			let werker2 = new Worker('script2.js');
+
+			werker1.addEventListener('message', function(msg){
+				console.log('Antwoord van 1: ' + msg.data);
+				console.log(Atomics.load(reeks, 0));
+			});
+
+			werker2.addEventListener('message', function(msg){
+				console.log('Antwoord van 2: ' + msg.data);			
+				console.log(Atomics.load(reeks, 0));				
+			});
+
+			werker1.postMessage(reeks);
+			werker2.postMessage(reeks);
+		</script>
+	</head>
+
+</html>
