@@ -21,8 +21,8 @@
 				console.log(Atomics.load(reeks, 0));				
 			});
 
-			werker1.postMessage(reeks);
-			werker2.postMessage(reeks);
+			async werker1.postMessage(reeks);
+			async werker2.postMessage(reeks);
 		</script>
 	</head>
 
