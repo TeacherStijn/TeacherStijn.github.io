@@ -6,7 +6,7 @@
 			let buffer = new SharedArrayBuffer(10);
 			
 			// probeer dit eens zonder deze thread-safe buffer
-			let reeks = new Uint8Array(buffer);
+			let reeks = new Uint8Array();
 
 			Atomics.store(reeks, 0, 42);
 
