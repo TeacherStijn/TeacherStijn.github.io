@@ -4,9 +4,7 @@
 	<head>
 		<script>
 			let buffer = new SharedArrayBuffer(10);
-			
-			// probeer dit eens zonder deze thread-safe buffer
-			let reeks = new Uint8Array();
+			let reeks = new Uint8Array(buffer);
 
 			Atomics.store(reeks, 0, 42);
 
@@ -23,7 +21,7 @@
 
 			// Buffer delen met de workers
 			werker1.postMessage(buffer);
-			werker1.postMessage(buffer);
+			werker2.postMessage(buffer);
 
 			setTimeout(function(){
 				Atomics.store(reeks, 0, 10);
