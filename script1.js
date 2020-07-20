@@ -1,5 +1,10 @@
 self.addEventListener('message', function(msg){
-	//setTimeout(
+	while (Atomics.read(msg.data,0)==42){
+		// Doe niets, wacht tot data is gewijzigd
+	}
+
+	self.postMessage(`Data gewijzigd naar: ` + Atomics.read(msg.data,0));
+	/*//setTimeout(
 	//	function(){
 			for (let i=0; i<1000000; i++){
 				Atomics.add(msg.data,0,10);
@@ -12,5 +17,5 @@ self.addEventListener('message', function(msg){
 				self.postMessage('Bijgewerkt');
 			}
 	//	}, 10000
-	//);
+	//);*/
 });

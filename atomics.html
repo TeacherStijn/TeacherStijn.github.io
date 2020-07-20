@@ -7,32 +7,23 @@
 			
 			// probeer dit eens zonder deze thread-safe buffer
 			let reeks = new Uint8Array(buffer);
-			
+
+			Atomics.store(buffer, 0, 42);
+
 			let werker1 = new Worker('script1.js');
 			let werker2 = new Worker('script2.js');
 
 			werker1.addEventListener('message', function(msg){
 				console.log('Antwoord van 1: ' + msg.data);
-				console.log(Atomics.load(reeks, 5));
-				console.log(Atomics.load(reeks, 10));
 			});
 
 			werker2.addEventListener('message', function(msg){
-				console.log('Antwoord van 2: ' + msg.data);			
-				console.log(Atomics.load(reeks, 5));
-				console.log(Atomics.load(reeks, 10));				
+				console.log('Antwoord van 2: ' + msg.data);
 			});
 
-			async function start1() {
-				werker1.postMessage(reeks);
-			}
-			
-			async function start2() {
-				werker2.postMessage(reeks);
-			}
-			
-			start1();
-			start2();
+			setTimeout(function(){
+				Atomics.store(buffer, 0, 10);
+			}, 5000);
 		</script>
 	</head>
 
