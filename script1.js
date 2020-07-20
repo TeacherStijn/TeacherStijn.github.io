@@ -1,9 +1,11 @@
 self.addEventListener('message', function(msg){
-	while (Atomics.read(msg.data,0)==42){
+	let reeks = new Uint8Array(msg.data);
+
+	while (Atomics.load(reeks,0)==42){
 		// Doe niets, wacht tot data is gewijzigd
 	}
 
-	self.postMessage(`Data gewijzigd naar: ` + Atomics.read(msg.data,0));
+	self.postMessage(`Data gewijzigd naar: ` + Atomics.load(reeks,0));
 	/*//setTimeout(
 	//	function(){
 			for (let i=0; i<1000000; i++){
