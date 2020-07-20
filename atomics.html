@@ -9,7 +9,6 @@
 			let reeks = new Uint8Array(buffer);
 
 			Atomics.store(reeks, 0, 42);
-			werker1.postMessage(buffer);
 
 			let werker1 = new Worker('script1.js');
 			let werker2 = new Worker('script2.js');
@@ -21,6 +20,10 @@
 			werker2.addEventListener('message', function(msg){
 				console.log('Antwoord van 2: ' + msg.data);
 			});
+
+			// Buffer delen met de workers
+			werker1.postMessage(buffer);
+			werker1.postMessage(buffer);
 
 			setTimeout(function(){
 				Atomics.store(reeks, 0, 10);
