@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<hmtl>
+<html>
 	<head>
 		<script>
 			let buffer = new SharedArrayBuffer(10);
@@ -9,6 +9,7 @@
 			let reeks = new Uint8Array(buffer);
 
 			Atomics.store(reeks, 0, 42);
+			werker1.postMessage(buffer);
 
 			let werker1 = new Worker('script1.js');
 			let werker2 = new Worker('script2.js');
@@ -23,7 +24,6 @@
 
 			setTimeout(function(){
 				Atomics.store(reeks, 0, 10);
-				werker1.postMessage(buffer);
 			}, 5000);
 		</script>
 	</head>
