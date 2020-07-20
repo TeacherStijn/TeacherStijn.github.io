@@ -8,7 +8,7 @@
 			// probeer dit eens zonder deze thread-safe buffer
 			let reeks = new Uint8Array(buffer);
 
-			Atomics.store(buffer, 0, 42);
+			Atomics.store(reeks, 0, 42);
 
 			let werker1 = new Worker('script1.js');
 			let werker2 = new Worker('script2.js');
@@ -22,7 +22,7 @@
 			});
 
 			setTimeout(function(){
-				Atomics.store(buffer, 0, 10);
+				Atomics.store(reeks, 0, 10);
 			}, 5000);
 		</script>
 	</head>
